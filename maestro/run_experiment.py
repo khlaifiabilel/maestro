@@ -2,6 +2,7 @@
 
 from functools import partial
 
+import scipy.spatial
 from clearml import Task
 
 from maestro import LOGGER
