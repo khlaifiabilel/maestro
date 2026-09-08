@@ -10,8 +10,11 @@ dependencies:
   # Core ML Framework (PyTorch with CUDA support)
   - pytorch==2.2.2
   - pytorch-cuda=12.1
+  - torchvision==0.17.2
   - pytorch-lightning==2.2.1
   - lightning==2.2.2
+  - torchmetrics==1.9.0
+  - fsspec==2024.12.0
 
   # Vision Transformers & SSL
   - einops==0.7.0
@@ -19,7 +22,7 @@ dependencies:
 
   # Config & CLI
   - omegaconf==2.3.0
-  - hydra-core=1.3
+  - hydra-core==1.3.6
   - dacite==1.9.2
 
   # Geospatial Data
@@ -29,6 +32,9 @@ dependencies:
   - pyarrow==18.1.0
 
   # Data Processing
+  - numpy==1.26.4
+  - scipy==1.17.1
+  - scikit-image==0.26.0
   - h5py==3.12.1
   - requests==2.31.0
   - opencv==4.11.0
@@ -52,4 +58,5 @@ dependencies:
       - hydra-zen==0.13.0
       - clearml==1.15.1
       - terratorch==1.1
-      - dacite==1.9.2
+      - albumentations==1.4.10
+      - torchgeo==0.7.0
