@@ -40,6 +40,7 @@ class TensorBoardLogger(TensorBoardLogger):
     @rank_zero_only
     def log_metrics(self, metrics: dict[str, float], step: int | None = None) -> None:
         """Log metrics, appending ssl phase info to epoch logging."""
+        metrics = metrics.copy()
         if "epoch" in metrics:
             metrics[f"{self.ssl_phase}_epoch"] = metrics["epoch"]
             metrics.pop("epoch", None)
