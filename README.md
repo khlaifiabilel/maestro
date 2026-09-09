@@ -169,6 +169,19 @@ poetry run python main.py \
         run.exp_dir=/path/to/experiments/dir run.exp_name=MAESTRO_TSAI-TS_base
 ```
 
+      To pre-train for 1000 epochs with TensorBoard and Weights & Biases, set
+      `WANDB_API_KEY` in the environment or run `wandb login` first, then use:
+
+      ```bash
+      poetry run python main.py \
+        model.model=mae \
+        opt_pretrain.epochs=1000 opt_probe.epochs=0 opt_finetune.epochs=0 \
+        datasets.name_dataset=treesatai_ts \
+        datasets.root_dir=/path/to/dataset/dir datasets.treesatai_ts.rel_dir=TreeSatAI-TS \
+        run.exp_dir=/path/to/experiments/dir run.exp_name=MAESTRO_TSAI-TS_1000 \
+        run.use_wandb=true run.wandb_project_name=maestro
+      ```
+
 Intra-dataset MAESTRO on PASTIS-HD:
 ```bash
 # pre-train, probe and finetune on PASTIS-HD
