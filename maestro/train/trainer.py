@@ -10,6 +10,7 @@ from pytorch_lightning.callbacks import (
     ModelCheckpoint,
     TQDMProgressBar,
 )
+from pytorch_lightning.loggers import WandbLogger
 from pytorch_lightning.loggers.logger import Logger
 
 from maestro.conf.opt import OptFinetuneConfig, OptPretrainConfig, OptProbeConfig
@@ -55,6 +56,10 @@ class SSLTrainer(pl.Trainer):
         self.b1 = opt.b1
         self.b2 = opt.b2
 
+        self.use_wandb = run.use_wandb
+        self.wandb_project_name = run.wandb_project_name
+        self.wandb_entity = run.wandb_entity
+        self.wandb_mode = run.wandb_mode
         self.loggers = self.configure_loggers()
         self.callbacks = self.configure_callbacks()
         super().__init__(
@@ -78,7 +83,18 @@ class SSLTrainer(pl.Trainer):
             version=self.exp_version,
             default_hp_metric=False,
         )
-        return [self.tb_logger]
+        loggers: list[Logger] = [self.tb_logger]
+        if self.use_wandb:
+            loggers.append(
+                WandbLogger(
+                    project=self.wandb_project_name,
+                    entity=self.wandb_entity,
+                    name=f"{self.exp_name}-{self.ssl_phase}",
+                    save_dir=self.exp_dir,
+                    mode=self.wandb_mode,
+                ),
+            )
+        return loggers
 
     def configure_callbacks(self) -> list[Callback]:
         """Configure callbacks."""

@@ -32,6 +32,7 @@ pyarrow = "18.1.0"
 matplotlib = "^3.10.0"
 dacite = "^1.9.2"
 terratorch = "^1.1"
+wandb = "^0.19.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.1.1"

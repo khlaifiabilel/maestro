@@ -25,6 +25,10 @@ class RunConfig:  # noqa: D101
     clearml_project_name: str = "ssl"
     clearml_tags: list[str] = field(default_factory=lambda: ["multimodal", "hydra"])
     clearml_offline_mode: bool = False
+    use_wandb: bool = False
+    wandb_project_name: str = "maestro"
+    wandb_entity: str | None = None
+    wandb_mode: str = "online"
 
 
 run_store = store(group="run")
